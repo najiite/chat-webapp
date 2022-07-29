@@ -12,9 +12,10 @@
       nicon === 'menu' ? (nicon = "close", closeClass = mdclass) : (nicon = "menu", closeClass= Newclass)
     }
   </script>
+  
   <nav class="p-2 white shadow md:flex md:items-center md:justify-between">
     <div class="flex items-center justify-between">
-        <span class="text-2xl mx-4 text-slate-700 font-bold"> WHAT TO DO?</span>
+        <span class="text-2xl mx-4 text-slate-700 font-bold"> Wixper</span>
         <span class="text-3xl md:opacity-0" on:click={Menu}><ion-icon name={nicon}></ion-icon></span>
     
     </div>
@@ -24,7 +25,7 @@
     <ul class={closeClass}>
         <li class="m-5 divide-y"><a href="/" class="nav-link">Home</a></li>
        
-        <li class="m-5"><a href  class="nav-link">Logout</a></li>
+        <li class="m-5"><a href="https://github.com/najiite/"  class="nav-link">Github</a></li>
       
     </ul>
     
