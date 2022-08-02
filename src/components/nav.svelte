@@ -1,4 +1,12 @@
 <script> 
+
+  import {supabase} from "../lib/supabaseClient"
+  const logout =()=>{
+    supabase.auth.signOut()
+    alert('Logged out, See you soon')
+  }
+  import { user } from '../stores/auth'
+
     let nicon = "menu"
     let mdclass = `bg-white  w-full left-0 md:flex md:items-center top-[80px] opacity-100 absolute`
     let closeClass = `md:flex md:items-center z-[-1] md:z-auto md:static 
@@ -26,6 +34,10 @@
         <li class="m-5 divide-y"><a href="/" class="nav-link">Home</a></li>
        
         <li class="m-5"><a href="https://github.com/najiite/"  class="nav-link">Github</a></li>
+        {#if $user }
+          
+        <li class="m-5"><a href on:click={logout} class="nav-link">Logout({$user.email})</a></li>
+        {/if}
       
     </ul>
     

@@ -1,38 +1,20 @@
 <script>
-    function autoBottom() {
-    document.body.scrollTo(0,50)
-  }
-  
+    import Message from '../components/message.svelte'
+    import { user } from '../stores/auth'
+    import { messages } from '../stores/messages'
+    console.log($user)
 </script>
-<svelte:window on:scroll={autoBottom} />
+
+
 <h1 class="heading">
     Chat webapp
+    
 </h1>
-<div class="chat-bubble-sender">
-    It has survived not only five centuries, but also the leap into electronic typesetting, 
-    remaining essentially unchanged. It was popularised in the 1960s with the release 
-    of Letraset sheets containing Lorem
-</div>
-<div class="chat-bubble-receiver">
-    It was popularised in the 1960s with the release 
-    of Letraset sheets containing Lorem
-</div>
-<div class="chat-bubble-sender">
-    It has survived
-</div>
-<div class="chat-bubble-receiver">
-    It has survived not only five centuries, but also the leap into electronic typesetting, 
-    remaining essentially unchanged. It was popularised in the 1960s with the release 
-    of Letraset sheets containing Lorem
-</div>
-<div class="chat-bubble-sender">
-    It has survived not only five centuries
-</div>
-<div class="chat-bubble-receiver">
-    It has survived not only five centuries, but also the leap into electronic typesetting, 
-    remaining essentially unchanged. It was popularised in the 1960s with the release 
-    of Letraset sheets containing Lorem
-</div>
+<p>User ID: {$user.id}</p>
+{#each $messages as message}
+    <Message message={message} />
+{/each}
+
 <div class="mb-10">
     <form >
         <div class="relative">

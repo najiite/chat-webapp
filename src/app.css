@@ -22,9 +22,9 @@
           @apply appearance-none border-b-2 border-neutral-500 focus:outline-none focus:border-sky-900 mt-3
       }
       .chat-bubble-receiver {
-          @apply bg-gray-200 rounded-3xl p-4 my-2 mr-5
+          @apply bg-gray-200 rounded-3xl p-4 my-2 mr-20 ml-2
       }
       .chat-bubble-sender {
-          @apply bg-purple-700 text-white rounded-3xl p-4 my-2 ml-5
+          @apply bg-purple-700 text-white rounded-3xl p-4 my-2 ml-20 mr-2
       }
     }
