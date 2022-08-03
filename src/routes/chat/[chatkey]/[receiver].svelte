@@ -1,7 +1,7 @@
 <script>
-    import Message from '../../components/message.svelte'
-    import { user } from '../../stores/auth'
-    import { messages, sendMessage, loadMessages } from '../../stores/messages'
+    import Message from '../../../components/message.svelte'
+    import { user } from '../../../stores/auth'
+    import { messages, sendMessage, loadMessages } from '../../../stores/messages'
     import { page } from '$app/stores';
     import { prevent_default } from 'svelte/internal';
 
@@ -19,9 +19,7 @@
 <h1 class="heading">
     Chat webapp
 </h1>
-<p>User ID: {$user.id}</p>
 <p>{chatkey}</p>
-<p>{receiver}</p>
 {#each $messages as message}
     <Message message={message} />
 {/each}

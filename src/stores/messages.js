@@ -1,6 +1,5 @@
 import { writable } from "svelte/store";
 import { supabase } from "../lib/supabaseClient"
-import { user } from './auth'
 export const messages = writable([])
 export const chats = writable([])
 
@@ -12,11 +11,11 @@ export const loadMessages = async (chatkey) => {
     }
     messages.set(data)
 }
-
 const loadNewmessages = async () => {
-    const mySubscription = supabase
-            .from('*')
-            .on('INSERT', payload => {
+    
+            supabase
+            .from('messages')
+            .on('*', payload => {
             messages.update( (cur) => { 
                 return [...cur, payload.new]
             })
@@ -33,7 +32,6 @@ export const loadChats = async () => {
         chats.set(data)
 
 }
-loadChats()
 
 export const sendMessage  = async (chatkey,sender,receiver,message) => {
     const { data, error } = await supabase
@@ -44,5 +42,17 @@ export const sendMessage  = async (chatkey,sender,receiver,message) => {
     if (error) {
         console.log(error)
     }
+    loadNewmessages()
 }
 
+export const newChat  = async (chatkey,user1,user2) => {
+    const { data, error } = await supabase
+    .from('chats')
+    .insert([
+        { chatkey, user1, user2},
+    ])
+    if (error) {
+        console.log(error)
+    }
+    window.location = `/chat/${chatkey}-${user1}`
+}

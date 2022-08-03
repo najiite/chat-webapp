@@ -36,7 +36,7 @@
         <li class="m-5"><a href="https://github.com/najiite/"  class="nav-link">Github</a></li>
         {#if $user }
           
-        <li class="m-5"><a href on:click={logout} class="nav-link">Logout({$user.email})</a></li>
+        <li class="m-5"><a href on:click={logout} class="nav-link">Logout</a></li>
         {/if}
       
     </ul>

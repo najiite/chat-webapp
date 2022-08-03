@@ -1,14 +1,15 @@
 <script>
   import {supabase} from "../lib/supabaseClient"
     import { user } from '../stores/auth'
-    import { loadMessages,loadChats } from "../stores/messages";
+    import { loadChats } from "../stores/messages";
     import "../app.css";
-    
-    user.set(supabase.auth.user())
 
+
+    user.set(supabase.auth.user())
     supabase.auth.onAuthStateChange((_, session) =>{
         user.set(session?.user)
         if (session?.user) {
+          loadChats()
         }
     })
 </script>
