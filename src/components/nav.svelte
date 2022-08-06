@@ -1,11 +1,12 @@
 <script> 
 
   import {supabase} from "../lib/supabaseClient"
-  const logout =()=>{
-    supabase.auth.signOut()
-    alert('Logged out, See you soon')
-  }
   import { user } from '../stores/auth'
+
+    const logout =()=>{
+      supabase.auth.signOut()
+      alert('Logged out, See you soon')
+    }
 
     let nicon = "menu"
     let mdclass = `bg-white  w-full left-0 md:flex md:items-center top-[80px] opacity-100 absolute`
@@ -23,7 +24,7 @@
   
   <nav class="p-2 white shadow md:flex md:items-center md:justify-between">
     <div class="flex items-center justify-between">
-        <span class="text-2xl mx-4 text-slate-700 font-bold"> Wixper</span>
+        <span class="text-2xl mx-4 text-teal-900 font-bold uppercase tracking-widest"> Wixper</span>
         <span class="text-3xl md:opacity-0" on:click={Menu}><ion-icon name={nicon}></ion-icon></span>
     
     </div>
@@ -35,7 +36,6 @@
        
         <li class="m-5"><a href="https://github.com/najiite/"  class="nav-link">Github</a></li>
         {#if $user }
-          
         <li class="m-5"><a href on:click={logout} class="nav-link">Logout</a></li>
         {/if}
       

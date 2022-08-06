@@ -1,7 +1,7 @@
 <script>
   import {supabase} from "../lib/supabaseClient"
     import { user } from '../stores/auth'
-    import { loadChats } from "../stores/messages";
+    import { loadChats, getProfile} from "../stores/messages";
     import "../app.css";
 
 
@@ -10,12 +10,15 @@
         user.set(session?.user)
         if (session?.user) {
           loadChats()
+          getProfile()
         }
     })
 </script>
-
+<svelte:head>
+  <title>Wixper Chat Webapp</title>
+</svelte:head>
   <Nav />
-    <div class="container max-w-lg mx-auto p-5">
+    <div class="mx-auto">
       {#if $user }
 
           <slot></slot>
@@ -23,4 +26,7 @@
           <Auth />
       {/if}
     </div>
+  
+    {#if $user }
   <Footer />
+  {/if}

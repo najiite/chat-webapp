@@ -3,6 +3,10 @@ import { supabase } from "../lib/supabaseClient"
 export const messages = writable([])
 export const chats = writable([])
 
+export let loading = true
+export let username = null
+export let displayname = null
+
 export const loadMessages = async (chatkey) => {
     const {data,error} = await supabase.from('messages').select().match({chatkey: chatkey})
     
@@ -11,6 +15,49 @@ export const loadMessages = async (chatkey) => {
     }
     messages.set(data)
 }
+export async function getProfile() {
+    try {
+      loading = true
+      const user = supabase.auth.user()
+
+      let { data, error, status } = await supabase
+        .from('profile')
+        .select(`username`)
+        .eq('id', user.id)
+        .single()
+
+      if (error && status !== 406) throw error
+
+      if (data) {
+        username = data.username
+      }
+    } catch (error) {
+      console.log(error.message)
+    } finally {
+      loading = false
+    }
+  }
+export async function getDisplayname(userid) {
+      try {
+        loading = true
+        let { data, error, status } = await supabase
+          .from('profile')
+          .select(`username`)
+          .eq('id', userid)
+          .single()
+  
+        if (error && status !== 406) throw error
+  
+        if (data) {
+          displayname = data.username
+        }
+      } catch (error) {
+        console.log(error.message)
+      } finally {
+        loading = false
+      }
+    }
+
 const loadNewmessages = async () => {
     
             supabase
@@ -45,14 +92,14 @@ export const sendMessage  = async (chatkey,sender,receiver,message) => {
     loadNewmessages()
 }
 
-export const newChat  = async (chatkey,user1,user2) => {
+export const newChat  = async (chatkey,user1,user2,username1,username2) => {
     const { data, error } = await supabase
     .from('chats')
     .insert([
-        { chatkey, user1, user2},
+        { chatkey, user1, user2,username1,username2},
     ])
     if (error) {
         console.log(error)
     }
-    window.location = `/chat/${chatkey}-${user1}`
+    window.location = `/chat/${chatkey}/${user1}`
 }
