@@ -103,3 +103,20 @@ export const newChat  = async (chatkey,user1,user2,username1,username2) => {
     }
     window.location = `/chat/${chatkey}/${user1}`
 }
+export const deleteChat  = async (chatkey) => {
+  const { data, error } = await supabase
+  .from('messages')
+  .delete()
+  .eq('chatkey', chatkey)
+
+  await supabase
+  .from('chats')
+  .delete()
+  .eq('chatkey', chatkey)
+
+
+  if (error) {
+      console.log(error)
+  }
+  window.location = `/`
+}
